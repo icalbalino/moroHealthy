@@ -8,10 +8,44 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"> </script>
+        <script src="https://kit.fontawesome.com/3b79ccf7db.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/datatables.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+        <link rel="stylesheet" href="./css/style_login.css">
+        <title>moroHealthy</title>
     </head>
+    
     <body>
-        <h1>Hello World!</h1>
+        <div class="container kontainer">
+            <div class="row kartu-utama">
+                <div class="col-6">
+                    <div class="card-body">
+                        <img src="./img/jamu1.jpg" alt="logo">
+                    </div>
+                </div>
+                <div class="col-6 kartu">
+                    <div class="card-body col colcard">
+                        <div class="col pinggir"></div>
+                        <div class="col tengah">
+                            <form action="dashboard" method="GET" >
+                                <input type="text"  class="form-control input1" placeholder="username" name="username"><br>
+                                <input type="password" class="form-control input1" placeholder="password" name="password"><br>
+                                <input class="btn tombol" type="Submit" value="Login" name="login">
+                            </form>
+                        </div>
+                        <div class="col pinggir"></div>
+                    </div>
+                </div>
+            </div>
+        </div>    
     </body>
 </html>

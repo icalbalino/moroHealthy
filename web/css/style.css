@@ -1,0 +1,74 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 12, 2020, 10:57:13 AM
+    Author     : user
+*/
+
+.side-menu-container{
+    background: white; 
+    box-shadow: -10px 10px 25px 5px #f3e1d8;
+}
+
+img{
+    height: 70px;
+    width: 70px;
+}
+
+.menu-title{
+    padding: 20px 8px;
+    margin: 10px auto;
+}
+
+.padd{
+    padding: 40px;
+}
+
+.card-shadow{
+    box-shadow: 0px 2px 5px 0px #f3e1d8;
+}
+
+.border-rad{
+    border-radius: 50px 0px 50px 0px;
+}
+
+.side-menu-item{
+    border-radius: 8px;
+    padding: 8px 8px;
+    padding-left: 24px;
+    margin: 2px;
+    vertical-align: middle;
+}
+
+.side-menu-item:hover{
+    background-color: #a3d8f4;
+    color: white;
+}
+
+.side-menu-item i, .side-menu-item a{
+    color: #7579e7;
+}
+
+.side-menu-item a{
+    text-decoration: none;
+}
+
+.side-menu-item i{
+    text-decoration: none;
+}
+
+body{
+    max-height: 100vh;
+    overflow-y: hidden;
+}
+
+.card-summary-title{
+    font-weight: bold;
+}
+
+#wrapper.dflex.side-menu-toggled{
+    background-color: blue;
+}
