@@ -1,0 +1,65 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 12, 2020, 11:40:02 AM
+    Author     : user
+*/
+.kontainer {
+    margin: 50px auto;
+}
+
+.kartu-utama{
+    border-radius: 50px 0px 50px 0px;
+    box-shadow: -10px 10px 25px 5px #f9f0eb;
+}
+
+img{
+    display: block;
+    margin: 50px auto;
+    width: 250px;
+    height: 250px;
+}
+
+.kartu{
+    background-color: #DFC13F;
+    border-radius: 0px 0px 50px 0px;
+    display: block;
+}
+
+.tombol{
+    background-color: #A95534;
+    color: white;
+    border-radius: 25px;
+    width: 50%;
+    margin: auto;
+    display: block;
+}
+
+.tombol:hover{
+    color: #DFC13F;
+    font-weight: bolder;
+    box-shadow: 0 0 15px 1px #f9f0eb;
+}
+
+.input1 {
+    width: 50%;
+    border-radius: 25px;
+    margin: auto;
+    display: block;
+}
+
+.colcard{
+    height: 100%;
+}
+
+.pinggir{
+    height: 20%;
+}
+
+.tengah{
+    padding: 25px;
+    height: 60%;
+}
