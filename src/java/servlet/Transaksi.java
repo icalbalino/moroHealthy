@@ -46,8 +46,10 @@ public class Transaksi extends HttpServlet {
             sessionCart = (List<Cart>)session.getAttribute("sessionCart");
             System.out.println(sessionCart.toString());
         }
-        else if(request.getParameter("checkout")!=null){
-//            session.removeAttribute("sessionCart");
+        if(request.getParameter("checkout")!=null){
+            session.removeAttribute("sessionCart");
+            session.setAttribute("sessionCart", null);
+            System.out.println("checkout");
             session.setAttribute("sessionCart", new ArrayList<Cart>());
             Trx trx = new Trx(0, 2, new Date());
             for(Cart cart:sessionCart){

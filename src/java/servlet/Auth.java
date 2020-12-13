@@ -5,7 +5,7 @@
  */
 package servlet;
 
-import dao.ItemDao;
+import dao.UserDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,14 +13,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Item;
+import javax.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
  * @author DB1407
  */
-@WebServlet(name = "ItemServlet", urlPatterns = {"/item"})
-public class ItemServlet extends HttpServlet {
+@WebServlet(name = "Login", urlPatterns = {"/auth"})
+public class Auth extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,33 +35,29 @@ public class ItemServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        if(request.getParameter("add") != null){
-            Item item = new Item(0, request.getParameter("nama"), Integer.parseInt(request.getParameter("stok")), Integer.parseInt(request.getParameter("harga")));
-            if(new ItemDao().insert(item)){
-                response.sendRedirect("stokbarang.jsp?msg=success");
+        HttpSession session = request.getSession();
+        User user = new UserDao().getByUsernameAndPassword(request.getParameter("username"), request.getParameter("password"));
+        if(request.getParameter("login")!=null){
+            if(user != null){
+                session.setAttribute("user", user);
+                response.sendRedirect("dashboard.jsp");
             }else{
-                response.sendRedirect("stokbarang.jsp?msg=fail");
+                response.sendRedirect("login.jsp?error");
             }
+        }else if(request.getParameter("logout")!=null){
+            session.invalidate();
+            response.sendRedirect("login.jsp");
         }
-        if(request.getParameter("update") != null){
-            System.out.println("update");
-            Item item = new Item(Integer.parseInt(request.getParameter("id")), request.getParameter("nama"), Integer.parseInt(request.getParameter("stok")), Integer.parseInt(request.getParameter("harga")));
-            System.out.println(item.toString());
-            if(new ItemDao().update(item)){
-                response.sendRedirect("stokbarang.jsp?msg=success");
-            }else{
-                response.sendRedirect("stokbarang.jsp?msg=fail");
-            }
-        }
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ItemServlet</title>");            
+            out.println("<title>Servlet Login</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ItemServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Login at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
