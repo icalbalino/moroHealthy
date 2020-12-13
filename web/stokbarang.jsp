@@ -26,20 +26,14 @@
 
         <link rel="stylesheet" type="text/css"
               href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/datatables.min.css" />
-        <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.22/datatables.min.js"> -->
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!-- <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" -->
-    <!-- rel="stylesheet" /> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
-    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css"> -->
-    <!-- <script type="text/javascript"
-        src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.bootstrap4.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V-Zelenny</title>
+    <title>moroHealthy</title>
 </head>
 <body>
     <div class="d-flex vh-100">
@@ -49,10 +43,9 @@
                 <a href="dashboard.jsp" class="list-group-item list-group-item-action bg-light"><i class="fas fa-home col-2"></i>
                     <span class="col">Dashboard</span></a>
                 <a href="transaksi.jsp" class="list-group-item list-group-item-action "><i class="fas fa-cube col-2"></i> <span class="col">Transaksi</span></a>
-                <a href="stokbarang.jsp" class="list-group-item list-group-item-action list-group-item-success"><i class="fas fa-cube col-2"></i> <span class="col">Stok Barang</span></a>
+                <a href="stokbarang.jsp" class="list-group-item list-group-item-action"><i class="fas fa-cube col-2"></i> <span class="col">Stok Barang</span></a>
                 <a href="history.jsp" class="list-group-item list-group-item-action bg-light"><i class="fas fa-history col-2"></i>
                     <span class="col">History</span></a>
-                <a href=".php" class="list-group-item list-group-item-action bg-light"><i class="fas fa-calculator col-2"></i><span class="col">Kasir</span></a>
                 <a class="btn btn-success text-light" href="../logout.php">Logout</a>
             </div>
         </div>
@@ -78,7 +71,8 @@
                             <td><%=item.getNama()%></td>
                             <td><%=item.getStok()%></td>
                             <td><%=item.getHarga()%></td>
-                            <td><button type="button" class="btn btn-success text-light" data-toggle="modal" data-target="#myModal">UPDATE</button></td>
+                            <td><a href=<%="stokbarang.jsp?update="+item.getId()%> type="button" class="btn btn-success text-light">UPDATE</a></td>
+                            <!--<td><button type="button" class="btn btn-success text-light" data-toggle="modal" data-target="#myModal">UPDATE</button></td>-->
                         </tr>
                         <%}%>
                     </tbody>
@@ -122,5 +116,52 @@
                         </div>
                     </div>
         </div>
+    </div>
+                    
+        <div class="modal" id="modal-update">
+            <form class="modal-dialog modal-xl" method="post" action="item">
+                <div class="modal-content">
+                    <div class="model-header">
+                        <h4 class="modal-title">TAMBAH ITEM</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <%
+                        System.out.println("cek");
+                        System.out.println(request.getParameter("update"));
+                        if(request.getParameter("update")!=null){
+                            Item item = new ItemDao().findById(Integer.parseInt(request.getParameter("update")+""));
+                        %>
+                    <div class="modal-body">
+                        <input class="form-control" type="text" name="id" value="<%=item.getId()%>" hidden>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th class="table-info" width="15%" nowrap>Nama item</th>
+                                <td><input class="form-control" type="text" name="nama" value="<%=item.getNama()%>" required></td>
+                            </tr>
+                            <tr>
+                                <th class="table-info">Stok</th>
+                                <td><input class="form-control" type="text" name="stok" value="<%=item.getStok()%>" required></td>
+                            </tr>
+                            <tr>
+                                <th class="table-info">Harga</th>
+                                <td><input class="form-control" type="text" name="harga"value="<%=item.getHarga()%>" required></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <%}%>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-info" name="update" value="UPDATE">
+                    </div>
+                </div>
+            </form>
+        </div>
+                    <%
+          if(request.getParameter("update")!=null){
+        %>
+        <script>
+            console.log("tes");
+            $('#modal-update').modal("show");
+        </script>
+        <%}%>
 </body>
 </html>

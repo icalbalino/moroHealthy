@@ -1,17 +1,5 @@
-<%-- 
-<<<<<<< HEAD
-    Document   : dashboard
-    Created on : Dec 12, 2020, 8:11:16 PM
-=======
-    Document   : transaksi
-    Created on : Dec 13, 2020, 8:21:33 AM
->>>>>>> e88a7dd940342a76d05931575792fcd81a2d0cb5
-    Author     : user
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<<<<<<< HEAD
 <%@page import="dao.ItemDao"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Item"%>
@@ -55,7 +43,7 @@
                 <div class='menu-title'><img src='./img/jamu3.jpg' alt=''></div>
                 <div class='list-group list-group-flush'>
                     <a href='dashboard.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-home col-2'></i> <span class='col'>Dashboard</span></a>
-                    <a href='transaksi.jsp' class='list-group-item list-group-item-action list-group-item-success'> <i class='fas fa-money-check col-2'></i> <span class='col'>Transaksi</span></a>
+                    <a href='transaksi.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-money-check col-2'></i> <span class='col'>Transaksi</span></a>
                     <a href='stokbarang.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-cube col-2'></i> <span class='col'>Stok Barang</span></a>
                     <a href='history.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-history col-2'></i> <span class='col'>History</span></a>
                     <a class='btn btn-success text-light' href=''>Logout</a>
@@ -64,17 +52,23 @@
 
             <div class='col container-fluid content'>
                 <div class="d-flex justify-content-center align-items-center vh-100 mh-100">
-                <!-- <button class="btn btn-success">Transaksi Baru</button> -->
                 <div class="card border-0 card-shadow" style="width: 32em">
                     <div class="h3 p-3">Keranjang</div>
                     <div class="list-group list-group-flush" style="max-height: 75vh; overflow-y: scroll" id="cart">
                         <%
-                            if(session.getAttribute("sessionCart")==null){
+                            int total = 0;
+                            if(session.getAttribute("sessionCart")!=null){
+                                for(Cart cart:(List<Cart>)session.getAttribute("sessionCart")){
+                                    total+=cart.getItem().getHarga()*cart.getQty();
+                                }
+                            }
+                            if(total<=0){
                         %>
                             <center>Keranjang masih kosong</center>
 
                         <%}else{
                             for(Cart cart:(List<Cart>)session.getAttribute("sessionCart")){
+                                total+=cart.getItem().getHarga()*cart.getQty();
                         %>
                         <div class="list-group-item d-flex align-items-center">
                             <div class="col"><%=cart.getItem().getNama()%></div>
@@ -82,42 +76,23 @@
                             <div class="col"><%=cart.getQty()%></div>
                         </div>
                         <%}}%>
-<!--                            foreach($carts as $cart){
-                              $subtotal = $cart['harga']*$cart['qty'];
-                              $total+=$subtotal;
-                              echo '<div class="list-group-item d-flex align-items-center">
-                                        <div class="col">'.$cart["nama"].'</div>
-                                        <div class="col">'.$cart["qty"].'</div>
-                                        <div class="col">'.$cart["harga"].'</div>
-                                        <a href="transaksi.php?delete&id='.$cart['id'].'" style="background: none; border: none"><i
-                                                class="fas fa-trash text-danger"></i></a>
-                                    </div>';
-                            }
-                        ?>-->
                     </div>
                     <div class="card-footer" style="margin-bottom: 20px">
-                        <p>Total: <?php echo $total;?></p>
+                        <% if(total>0){
+                        %>
+                        <p>Total: <%=total%></p>
+                        <%}%>
                         <div class="float-right">
-<!--                            <?php
-                                if(count($carts) > 0){
-                                    echo '<button class="btn btn-danger" onclick="willDeleteCart()">Hapus Keranjang</button>';
-                                }
-                            ?>-->
-
                             <button class="btn btn-success" data-toggle="modal" data-target="#modal-item-list">Tambah Item</button>
                         </div>
                     </div>
 
                     <div class="p-4" style="text-align:right;">
                         <%
-                            if(session.getAttribute("sessionCart")!=null){
+                            if(total>0){
                         %>
                         <a class="btn btn-primary" href="transaksi?checkout">Simpan Transaksi</a>
                         <%}%>
-<!--                        <?php
-                        if(count($carts)>0)
-                            echo '<a class="btn btn-primary" href="transaksi/checkout.php">Pembayaran</a>'
-                        ?>-->
                     </div>
                 </div>
             </div>
@@ -218,15 +193,3 @@
         }
     </script>
     </body>
-
-=======
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
->>>>>>> e88a7dd940342a76d05931575792fcd81a2d0cb5
-</html>

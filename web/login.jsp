@@ -36,10 +36,10 @@
                     <div class="card-body col colcard">
                         <div class="col pinggir"></div>
                         <div class="col tengah">
-                            <form action="dashboard" method="GET" >
+                            <form action="auth" method="POST" >
                                 <input type="text"  class="form-control input1" placeholder="username" name="username"><br>
                                 <input type="password" class="form-control input1" placeholder="password" name="password"><br>
-                                <input class="btn tombol" type="Submit" value="Login" name="login">
+                                <input class="btn tombol" type="Submit" value="login" name="login">
                             </form>
                         </div>
                         <div class="col pinggir"></div>
