@@ -1,11 +1,17 @@
 <%-- 
+<<<<<<< HEAD
     Document   : dashboard
     Created on : Dec 12, 2020, 8:11:16 PM
+=======
+    Document   : transaksi
+    Created on : Dec 13, 2020, 8:21:33 AM
+>>>>>>> e88a7dd940342a76d05931575792fcd81a2d0cb5
     Author     : user
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<<<<<<< HEAD
 <%@page import="dao.ItemDao"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Item"%>
@@ -213,4 +219,14 @@
     </script>
     </body>
 
+=======
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+    </body>
+>>>>>>> e88a7dd940342a76d05931575792fcd81a2d0cb5
 </html>

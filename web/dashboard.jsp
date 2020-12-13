@@ -37,9 +37,9 @@
             <div class='vh-100 side-menu-container d-flex flex-column justify-content space-between' id='side-menu'>
                 <div class='menu-title'><img src='./img/jamu3.jpg' alt=''></div>
                 <div class='list-group list-group-flush'>
-                    <a href='' class='list-group-item list-group-item-action'> <i class='fas fa-home col-2'></i> <span class='col'>Dashboard</span></a>
-                    <a href='' class='list-group-item list-group-item-action'> <i class='fas fa-money-check col-2'></i> <span class='col'>Transaksi</span></a>
-                    <a href='' class='list-group-item list-group-item-action'> <i class='fas fa-history col-2'></i> <span class='col'>History</span></a>
+                    <a href='dashboard.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-home col-2'></i> <span class='col'>Dashboard</span></a>
+                    <a href='transaksi.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-money-check col-2'></i> <span class='col'>Transaksi</span></a>
+                    <a href='history.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-history col-2'></i> <span class='col'>History</span></a>
                     <a class='btn btn-success text-light' href=''>Logout</a>
                 </div>    
             </div>
