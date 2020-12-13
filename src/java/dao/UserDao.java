@@ -54,7 +54,9 @@ public class UserDao {
         PreparedStatement statement;
         try {
             statement = kon.getConn().prepareStatement(SELECT_BY_USERNAME_AND_PASSWORD);
-            rs = statement.executeQuery(SELECT_BY_USERNAME_AND_PASSWORD);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            rs = statement.executeQuery();
             while(rs.next()){
                 return new User(rs.getInt("id"), rs.getString("nama"), rs.getString("role"), rs.getString("username"), rs.getString("password"));
             }

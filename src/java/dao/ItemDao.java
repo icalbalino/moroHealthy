@@ -15,14 +15,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Item;
-/**
- *
- * @author DB1407
- */
 public class ItemDao {
     private final String SELECT = "select * from item";
     private final String SELECT_BY_ID = "select * from item where id=?";
     private final String INSERT = "INSERT into item(nama, stok, harga) values(?, ?, ?)";
+    private final String UPDATE = "update item set nama=?, stok=?, harga=? where id=? ";
+    
     private Koneksi kon;
     
     public ItemDao(){
@@ -50,6 +48,7 @@ public class ItemDao {
     }
     
     public Item findById(int id){
+        System.out.println("item find by id "+id);
         ResultSet rs;
         try {
             PreparedStatement preparedStatement = kon.getConn().prepareStatement(SELECT_BY_ID);
@@ -57,6 +56,7 @@ public class ItemDao {
             rs = preparedStatement.executeQuery();
             while(rs.next()){
                 Item item = new Item(rs.getInt("id"), rs.getString("nama"), rs.getInt("stok"), rs.getInt("harga"));
+                System.out.println(item.toString());
                 return item;
             }
             rs.close();
@@ -78,6 +78,31 @@ public class ItemDao {
                 statement.setString(1, item.getNama());
                 statement.setInt(2, item.getStok());
                 statement.setInt(3, item.getHarga());
+                int res = statement.executeUpdate();
+                statement.close();
+                kon.getConn().close();
+                if (res > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return false;
+            }
+        }
+    }
+    
+    public boolean update(Item item) {
+        if (kon.getConn() == null) {
+            return false;
+        } else {
+            try {
+                PreparedStatement statement = kon.getConn().prepareStatement(UPDATE);
+                statement.setString(1, item.getNama());
+                statement.setInt(2, item.getStok());
+                statement.setInt(3, item.getHarga());
+                statement.setInt(4, item.getId());
                 int res = statement.executeUpdate();
                 statement.close();
                 kon.getConn().close();

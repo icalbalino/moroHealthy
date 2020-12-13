@@ -25,6 +25,8 @@ import model.Trx;
 public class DetailTrxDao {
     private final String SELECT = "select * from detail_trx";
     private final String INSERT = "insert into detail_trx(trx_id, item_id, subtotal, qty) values(?,?,?,?)";
+    private final String COUNT_DETAIL_TRX = "select count(*) from trx t join detail_trx dt where t.id=dt.trx_id and DATE_FORMAT(t.tanggal, '%Y-%m-%d') = curdate()";
+    
     
     private Koneksi kon;
     
@@ -76,5 +78,23 @@ public class DetailTrxDao {
                 return false;
             }
         }
+    }
+    
+    public int countDetailTrx(){
+        ResultSet rs;
+        Statement statement;
+        try {
+            statement = kon.getConn().createStatement();
+            rs = statement.executeQuery(COUNT_DETAIL_TRX);
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+            rs.close();
+            statement.close();
+            kon.getConn().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 }

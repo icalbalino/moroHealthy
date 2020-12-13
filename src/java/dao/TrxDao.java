@@ -21,13 +21,14 @@ import model.Item;
 import model.Trx;
 import model.Cart;
 import model.DetailTrx;
-/**
- *
- * @author DB1407
- */
 public class TrxDao {
-    private final String SELECT = "select * from item";
+    private final String SELECT = "select * from trx order by tanggal desc";
     private final String INSERT = "insert into trx (kasir_id, tanggal) values(?, ?)";
+    private static final String COUNT_TRX = "SELECT count(*) FROM trx where DATE_FORMAT(tanggal, '%Y-%m-%d') = curdate()";
+    private static final String COUNT_SUBTOTAL = "select sum(s.subtotal) from\n" +
+"(SELECT sum(dt.subtotal) as subtotal FROM trx t JOIN detail_trx dt where t.id=dt.trx_id and DATE_FORMAT(t.tanggal, '%Y-%m-%d') = curdate() group by t.id) as s";
+    
+
     private Koneksi kon;
     
     public TrxDao(){
@@ -42,7 +43,7 @@ public class TrxDao {
             statement = kon.getConn().createStatement();
             rs = statement.executeQuery(SELECT);
             while(rs.next()){
-                Trx trx = new Trx(rs.getInt("id"), rs.getInt("kasir"), rs.getDate("tanggal"));
+                Trx trx = new Trx(rs.getInt("id"), rs.getInt("kasir_id"), rs.getDate("tanggal"));
                 trxes.add(trx);
             }
             rs.close();
@@ -93,5 +94,40 @@ public class TrxDao {
                 return false;
             }
         }
+    }
+    
+    public int countTrx(){
+        ResultSet rs;
+        Statement statement;
+        try {
+            statement = kon.getConn().createStatement();
+            rs = statement.executeQuery(COUNT_TRX);
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+            rs.close();
+            statement.close();
+            kon.getConn().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    public int countSubtotal(){
+        ResultSet rs;
+        Statement statement;
+        try {
+            statement = kon.getConn().createStatement();
+            rs = statement.executeQuery(COUNT_SUBTOTAL);
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+            rs.close();
+            statement.close();
+            kon.getConn().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 }
