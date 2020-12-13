@@ -15,6 +15,10 @@ public class DetailTrx {
     private int itemId;
     private int subtotal;
 
+    public DetailTrx(int aInt, int aInt0, int aInt1, int aInt2) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId() {
         return id;
     }
