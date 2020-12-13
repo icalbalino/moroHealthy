@@ -16,6 +16,12 @@ public class Trx {
     private int kasirId;
     private Date tanggal;
 
+    public Trx(int id, int kasirId, Date tanggal) {
+        this.id = id;
+        this.kasirId = kasirId;
+        this.tanggal = tanggal;
+    }
+
     public int getId() {
         return id;
     }
