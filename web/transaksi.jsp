@@ -9,6 +9,8 @@
 <%@page import="dao.ItemDao"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Item"%>
+<%@page import="model.Cart"%>
+
 <html lang='en'>
 
     <head>
@@ -46,9 +48,10 @@
             <div class='vh-100 side-menu-container d-flex flex-column justify-content space-between' id='side-menu'>
                 <div class='menu-title'><img src='./img/jamu3.jpg' alt=''></div>
                 <div class='list-group list-group-flush'>
-                    <a href='' class='list-group-item list-group-item-action'> <i class='fas fa-home col-2'></i> <span class='col'>Dashboard</span></a>
-                    <a href='' class='list-group-item list-group-item-action'> <i class='fas fa-money-check col-2'></i> <span class='col'>Transaksi</span></a>
-                    <a href='' class='list-group-item list-group-item-action'> <i class='fas fa-history col-2'></i> <span class='col'>History</span></a>
+                    <a href='dashboard.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-home col-2'></i> <span class='col'>Dashboard</span></a>
+                    <a href='transaksi.jsp' class='list-group-item list-group-item-action list-group-item-success'> <i class='fas fa-money-check col-2'></i> <span class='col'>Transaksi</span></a>
+                    <a href='stokbarang.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-cube col-2'></i> <span class='col'>Stok Barang</span></a>
+                    <a href='history.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-history col-2'></i> <span class='col'>History</span></a>
                     <a class='btn btn-success text-light' href=''>Logout</a>
                 </div>    
             </div>
@@ -59,7 +62,20 @@
                 <div class="card border-0 card-shadow" style="width: 32em">
                     <div class="h3 p-3">Keranjang</div>
                     <div class="list-group list-group-flush" style="max-height: 75vh; overflow-y: scroll" id="cart">
-                        <center>Keranjang masih kosong</center>
+                        <%
+                            if(session.getAttribute("sessionCart")==null){
+                        %>
+                            <center>Keranjang masih kosong</center>
+
+                        <%}else{
+                            for(Cart cart:(List<Cart>)session.getAttribute("sessionCart")){
+                        %>
+                        <div class="list-group-item d-flex align-items-center">
+                            <div class="col"><%=cart.getItem().getNama()%></div>
+                            <div class="col"><%=cart.getItem().getHarga()%></div>
+                            <div class="col"><%=cart.getQty()%></div>
+                        </div>
+                        <%}}%>
 <!--                            foreach($carts as $cart){
                               $subtotal = $cart['harga']*$cart['qty'];
                               $total+=$subtotal;
@@ -87,6 +103,11 @@
                     </div>
 
                     <div class="p-4" style="text-align:right;">
+                        <%
+                            if(session.getAttribute("sessionCart")!=null){
+                        %>
+                        <a class="btn btn-primary" href="transaksi?checkout">Simpan Transaksi</a>
+                        <%}%>
 <!--                        <?php
                         if(count($carts)>0)
                             echo '<a class="btn btn-primary" href="transaksi/checkout.php">Pembayaran</a>'
@@ -96,7 +117,7 @@
             </div>
             </div>
         </div>
-        <form id="modal-item-list" class="modal" tabindex="-1" role="dialog" action="transaksi.php" method="POST">
+        <form id="modal-item-list" class="modal" tabindex="-1" role="dialog" action="transaksi" method="POST">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -122,27 +143,11 @@
                                     <td><%= items.get(i).getId()%></td>
                                     <td><%= items.get(i).getNama()%></td>
                                     <td><%= items.get(i).getHarga()%></td>
-                                    <td><input type='number' class='form-controll' ></td>
+                                    <td><input type='number' class='form-controll' name="qty[<%=items.get(i).getId()%>]"></td>
                                 </tr>
                             <%
                             }    
                             %>
-<!--                            <?php
-                            $i=0;
-                            foreach ($items as $item) {
-                                // <td><input class="btn btn-link" type="submit" name="addToCart" value="'.$item['nama'].'"></td>
-
-                                echo '
-                                    <tr>
-                                        <td><input type="checkbox" name="checked['.$item['id'].']">&nbsp;'.$item['id'].'</td>
-                                        <td>'.$item["nama"].'</td>
-                                        <td>'.$item['harga'].'</td>
-                                        <td><input class="form-control" type="number" name="qty['.$item['id'].']" value=0 style="width: 128px"></td>
-                                    </tr>
-                                ';
-                                $i++;
-                            }
-                        ?>-->
                         </tbody>
                     </table>
                 </div>
