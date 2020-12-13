@@ -26,7 +26,7 @@
                     <a href='transaksi.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-money-check col-2'></i> <span class='col'>Transaksi</span></a>
                     <a href='stokbarang.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-cube col-2'></i> <span class='col'>Stok Barang</span></a>
                     <a href='history.jsp' class='list-group-item list-group-item-action'> <i class='fas fa-history col-2'></i> <span class='col'>History</span></a>
-                    <a class='btn btn-success text-light' href='auth?logout'>Logout</a>
+                    <a class='btn btn-success text-light' href=''>Logout</a>
                 </div>    
             </div>
 
@@ -55,14 +55,6 @@
                     </div>
             </div>
         </div>
-                
-<!--//      <script>
-//          $('#side-menu-toggle').click(function(e){
-//          console.log('tes')
-//          e.preventDefault();
-//          $("#side-menu").width=10
-//          });
-//      </script>-->
     </body>
 
 </html>

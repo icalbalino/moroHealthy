@@ -16,10 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.User;
 
-/**
- *
- * @author DB1407
- */
 @WebServlet(name = "Login", urlPatterns = {"/auth"})
 public class Auth extends HttpServlet {
 

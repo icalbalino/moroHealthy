@@ -145,51 +145,5 @@
                 "lengthChange": false,
             });
         });
-
-        var carts = [{
-            "name": "brokoli",
-            "qty": 10,
-            "price": 10000
-        }]
-
-        function addItemToCart(e, data) {
-            console.log("add item", data)
-            array_push(carts, data)
-            renderList()
-        }
-
-        function renderList() {
-            var html = "";
-            for (var i = 0; i < carts.length; i++) {
-                console.log(i)
-                var cart = carts[i]
-                // console.log(carts)
-                html += '<div class="list-group-item d-flex align-items-center">' +
-                    '<div class="col">' + cart.name + '</div>' +
-                    '<div class="col">' + cart.qty + '</div>' +
-                    '<div class="col">Rp' + (cart.qty * cart.price) + '</div>' +
-                    '<button style="background: none; border: none"><i class="fas fa-trash text-danger"></i></button>' +
-                    '</div>'
-            }
-            console.log(html)
-            $('#cart').append(html)
-        }
-
-        function willDeleteCart() {
-            Swal.fire({
-                title: 'Hapus Keranjang',
-                text: "Anda yakin ingin menhapus keranjang?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = "transaksi.php?delete"
-                }
-            })
-        }
     </script>
     </body>
