@@ -53,5 +53,10 @@ public class Item {
     public void setHarga(int harga) {
         this.harga = harga;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" + "id=" + id + ", nama=" + nama + ", stok=" + stok + ", harga=" + harga + '}';
+    }
     
 }
