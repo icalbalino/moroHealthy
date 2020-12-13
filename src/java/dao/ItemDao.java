@@ -6,6 +6,7 @@
 package dao;
 
 import config.Koneksi;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,6 +21,8 @@ import model.Item;
  */
 public class ItemDao {
     private final String SELECT = "select * from item";
+    private final String SELECT_BY_ID = "select * from item where id=?";
+    private final String INSERT = "INSERT into item(nama, stok, harga) values(?, ?, ?)";
     private Koneksi kon;
     
     public ItemDao(){
@@ -44,5 +47,48 @@ public class ItemDao {
             Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return items;
+    }
+    
+    public Item findById(int id){
+        ResultSet rs;
+        try {
+            PreparedStatement preparedStatement = kon.getConn().prepareStatement(SELECT_BY_ID);
+            preparedStatement.setInt(1, id);
+            rs = preparedStatement.executeQuery();
+            while(rs.next()){
+                Item item = new Item(rs.getInt("id"), rs.getString("nama"), rs.getInt("stok"), rs.getInt("harga"));
+                return item;
+            }
+            rs.close();
+            preparedStatement.close();
+            kon.getConn().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+        
+    
+    public boolean insert(Item item) {
+        if (kon.getConn() == null) {
+            return false;
+        } else {
+            try {
+                PreparedStatement statement = kon.getConn().prepareStatement(INSERT);
+                statement.setString(1, item.getNama());
+                statement.setInt(2, item.getStok());
+                statement.setInt(3, item.getHarga());
+                int res = statement.executeUpdate();
+                statement.close();
+                kon.getConn().close();
+                if (res > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (SQLException ex) {
+                return false;
+            }
+        }
     }
 }
